@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->string('directorie_name');
+            $table->string('directory_name');
             $table->timestamps();
         });
     }

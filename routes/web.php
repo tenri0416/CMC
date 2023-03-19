@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ComponentTestController;
 use App\Http\Controllers\LifeCycleTestController;
 use App\Http\Controllers\User\MemoController;
+use App\Http\Controllers\User\DirectoryController;
+
 
 /*
 
@@ -25,6 +27,10 @@ Route::get('/', function () {
 //     return view('index
 //     ');
 // });
+
+Route::resource('directory', DirectoryController::class)
+    ->middleware(['auth:users']); //exceptは以外という意味 showメゾットを外す
+
 Route::resource('memo', MemoController::class)
     ->middleware(['auth:users']); //exceptは以外という意味 showメゾットを外す
 

@@ -6,33 +6,37 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use App\Models\Memo;
+use App\Models\Directory;
 
-class MemoController extends Controller
+class DirectoryController extends Controller
 {
+
     public function __construct()
     {
-        $this->middleware('auth:users');
-        $this->middleware(function ($request, $next) {
+        // $this->middleware('auth:users');
+        // $this->middleware(function ($request, $next) {
 
-            // $id = $request->route()->parameter('iamge'); //shopのid取得
-            // if (!is_null($id)) { // null判定
-            //     $ImagesOrderId = Image::findOrFail($id)->owner->id;
-            //     $shopId = (int)$ImagesOrderId; // キャスト 文字列→数値に型変換
-            //     if ($shopId !==  Auth::id()) {
-            //         abort(404); // 404画面表示
-            //     }
-            // }
-            // return $next($request);
-        });
+        // $id = $request->route()->parameter('iamge'); //shopのid取得
+        // if (!is_null($id)) { // null判定
+        //     $ImagesOrderId = Image::findOrFail($id)->owner->id;
+        //     $shopId = (int)$ImagesOrderId; // キャスト 文字列→数値に型変換
+        //     if ($shopId !==  Auth::id()) {
+        //         abort(404); // 404画面表示
+        //     }
+        // }
+        // return $next($request);
+        // });
     }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
+        $directory = Directory::where('user_id', Auth::id())
+            ->orderBy('updated_at', 'desc')
+            ->paginate(10);
 
-        return view('user.memo.index');
+        return view('user.directory.index', compact('directory'));
     }
 
     /**

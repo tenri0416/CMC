@@ -15,7 +15,7 @@
                     <x-nav-link :href="route('user.dashboard')" :active="request()->routeIs('user,dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('user.memo.index')" :active="request()->routeIs('user.memo.index')">
+                    <x-nav-link :href="route('user.directory.index')" :active="request()->routeIs('user.directory.index')">
                         メモ
                     </x-nav-link>
                 </div>
@@ -81,7 +81,7 @@
             <x-responsive-nav-link :href="route('user.dashboard')" :active="request()->routeIs('user.dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('user.memo.index')" :active="request()->routeIs('user.memo.index')">
+            <x-responsive-nav-link :href="route('user.directory.index')" :active="request()->routeIs('user.directory.index')">
                 メモ
             </x-responsive-nav-link>
         </div>

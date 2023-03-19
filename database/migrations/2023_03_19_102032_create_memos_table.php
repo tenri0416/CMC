@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('memos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('directorie_id')
+            $table->foreignId('directory_id')
                 ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
