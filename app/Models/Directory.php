@@ -10,7 +10,7 @@ use App\Models\Memo;
 class Directory extends Model
 {
     use HasFactory;
-
+    protected $fillable = ['user_id', 'directory_name'];
     public function memo()
     {
         return $this->hasOne(Memo::class);

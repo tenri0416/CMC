@@ -7,6 +7,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Directory;
+use Throwable;
+use Illuminate\Validation\Rules;
+
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Hash;
+
+
+
+use Illuminate\Support\Facades\Log;
 
 class DirectoryController extends Controller
 {
@@ -44,7 +54,7 @@ class DirectoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('user.directory.create');
     }
 
     /**
@@ -52,7 +62,26 @@ class DirectoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'directory_name' => ['required', 'string', 'max:50', 'min:1'],
+        ]);
+
+        try {
+            DB::transaction(
+                function () use ($request) {
+                    $directory = Directory::create([
+                        'user_id' => Auth::id(),
+                        'directory_name' => $request->directory_name,
+
+                    ]);
+                },
+                2
+            );
+        } catch (Throwable $e) {
+            Log::error($e); //エラーを（例外を)Logに書き込む
+            throw $e; //エラー(例外を)画面に出す
+        }
+        return redirect()->route('user.directory.index');
     }
 
     /**
