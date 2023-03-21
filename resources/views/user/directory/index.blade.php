@@ -17,7 +17,7 @@
 
                             <!-- Modal toggle -->
                             <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal"
-                                class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                                class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px- py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                                 type="button">
                                 <img alt="folder" {{-- class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" --}}
                                     src="{{ asset('/images/icons8-mac-folder-48.png') }}">
@@ -89,6 +89,17 @@
                                                     </h2>
                                                     <p class="text-gray-500">更新日</p>
                                                 </div>
+                                            </a>
+
+                                            <form id="delete_{{ $dire->id }}" method="post"
+                                                action="{{ route('user.directory.destroy', ['directory' => $dire->id]) }}">
+                                                @csrf
+                                                @method('DELETE')
+                                                <div class="px-4 py-3">
+                                                    <a data-id="{{ $dire->id }}" onclick="deletePost(this)"
+                                                        class=" text-white bg-red-300 border-0 py-2 px-4 focus:outline-none hover:bg-red-500 rounded ">削除</a>
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
                                 @endforeach
@@ -102,4 +113,12 @@
             </div>
         </div>
     </div>
+    <script>
+        function deletePost(e) {
+            'use strict';
+            if (confirm('本当に削除してもいいですか?')) {
+                document.getElementById('delete_' + e.dataset.id).submit();
+            }
+        }
+    </script>
 </x-app-layout>

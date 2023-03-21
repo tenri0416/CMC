@@ -31,6 +31,7 @@ class MemoController extends Controller
      */
     public function index()
     {
+        dd('index');
     }
 
     /**
@@ -44,8 +45,16 @@ class MemoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
+        dd($id);
+
+        Memo::create([
+            'directory_id' => $id,
+            'title' => 'タイトルを入力してください',
+            'content' => '内容を入力してください',
+        ]);
+        return redirect()->route('user.memo.show', compact('id'));
     }
 
     /**
@@ -54,11 +63,13 @@ class MemoController extends Controller
     public function show(string $id)
     {
         //
+        dd($id);
 
         $memos = Memo::where('directory_id', $id)->get();
+        $directory_name = Memo::where('directory_id', $id)->first();
 
 
-        return view('user.memo.index', compact('memos'));
+        return view('user.memo.index')->with(['memos' => $memos, 'directory_name' => $directory_name]);
     }
 
     /**

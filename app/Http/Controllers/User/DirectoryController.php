@@ -8,13 +8,13 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Directory;
 use Throwable;
+use App\Models\Memo;
 use Illuminate\Validation\Rules;
 
 use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
+
+
 use Illuminate\Support\Facades\Hash;
-
-
 
 use Illuminate\Support\Facades\Log;
 
@@ -72,7 +72,11 @@ class DirectoryController extends Controller
                     $directory = Directory::create([
                         'user_id' => Auth::id(),
                         'directory_name' => $request->directory_name,
-
+                    ]);
+                    Memo::create([
+                        'directory_id' => $directory->id,
+                        'title' => 'タイトルを入力してください',
+                        'content' => '内容を入力してください',
                     ]);
                 },
                 2
@@ -113,6 +117,7 @@ class DirectoryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Directory::findOrFail($id)->delete(); //ソフトデリート
+        return redirect()->route('user.directory.index');
     }
 }

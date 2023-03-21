@@ -8,6 +8,7 @@ use App\Models\Directory;
 
 class Memo extends Model
 {
+    protected $fillable = ['directory_id', 'title', 'content'];
     use HasFactory;
 
     public function directory()
