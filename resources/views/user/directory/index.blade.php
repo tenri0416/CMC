@@ -17,9 +17,11 @@
 
                             <!-- Modal toggle -->
                             <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal"
-                                class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                                class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                                 type="button">
-                                新規作成
+                                <img alt="folder" {{-- class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" --}}
+                                    src="{{ asset('/images/icons8-mac-folder-48.png') }}">
+                                作成
                             </button>
 
                             <!-- Main modal -->
@@ -76,20 +78,23 @@
                                 @foreach ($directory as $dire)
                                     <div class="p-2 lg:w-1/3 md:w-1/2 w-full">
                                         <div class="h-full flex items-center border-gray-200 border p-4 rounded-lg">
-                                            {{-- <img alt="team"
+                                            <img alt="folder"
                                                 class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
-                                                src="https://dummyimage.com/80x80"> --}}
-                                            <div class="flex-grow">
-                                                <h2 class="text-gray-900 title-font font-medium"contenteditable>
-                                                    {{ $dire->directory_name }}
-                                                </h2>
-                                                <p class="text-gray-500">更新日</p>
-                                            </div>
+                                                src="{{ asset('/images/icons8-mac-folder-48.png') }}">
+
+                                            <a href="{{ route('user.memo.show', $dire->id) }}">
+                                                <div class="flex-grow">
+                                                    <h2 class="text-gray-900 title-font font-medium"contenteditable>
+                                                        {{ $dire->directory_name }}
+                                                    </h2>
+                                                    <p class="text-gray-500">更新日</p>
+                                                </div>
                                         </div>
                                     </div>
                                 @endforeach
                             </div>
                         </div>
+                        {{ $directory->links() }}
                     </section>
                     {{-- ここから上が独自の --}}
 
