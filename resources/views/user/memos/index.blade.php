@@ -17,7 +17,13 @@
                                     {{ $directory_name->directory->directory_name }}</h1>
 
                             </div>
-                            <a href="{{ route('user.memo.store', $directory_name->directory->directory_id) }}">作成</a>
+
+                            <form method="post"action="{{route('user.memo.store',['memo'=>$directory_name->directory->id])}}">
+                                @csrf
+                                @method('post')
+
+                                <button>作成</button>
+                            </form>
                             <div class="lg:w-2/3 w-full mx-auto overflow-auto">
                                 <table class="table-auto w-full text-left whitespace-no-wrap">
                                     <thead>
@@ -44,7 +50,7 @@
                                             <tr>
 
                                                 <td class="px-4 py-3"><a
-                                                        href="{{ route('user.expired-users.show', $memo->id) }}">{{ $memo->title }}</a>
+                                                        href="{{ route('user.memo.open', $memo->id) }}">{{ $memo->title }}</a>
                                                 </td>
                                                 {{-- <td class="px-4 py-3">5 Mb/s</td>
                                                 <td class="px-4 py-3">15 GB</td>

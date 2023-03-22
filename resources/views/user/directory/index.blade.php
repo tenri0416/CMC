@@ -82,7 +82,7 @@
                                                 class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
                                                 src="{{ asset('/images/icons8-mac-folder-48.png') }}">
 
-                                            <a href="{{ route('user.memo.show', $dire->id) }}">
+                                            <a href="{{ route('user.memo.index',$dire->id) }}">
                                                 <div class="flex-grow">
                                                     <h2 class="text-gray-900 title-font font-medium"contenteditable>
                                                         {{ $dire->directory_name }}

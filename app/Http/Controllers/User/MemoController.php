@@ -29,32 +29,46 @@ class MemoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(string $id)
     {
-        dd('index');
+
+        $memos = Memo::where('directory_id', $id)->get();
+        $directory_name = Memo::where('directory_id', $id)->first();
+
+
+        return view('user.memos.index')->with(['memos' => $memos, 'directory_name' => $directory_name]);
+
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($id)
     {
-        //
+
+
+        // $memo = Memo::where('id', $id)->get();
+
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, $id)
+    public function store(Request $request ,$id)
     {
-        dd($id);
 
         Memo::create([
             'directory_id' => $id,
             'title' => 'タイトルを入力してください',
             'content' => '内容を入力してください',
         ]);
-        return redirect()->route('user.memo.show', compact('id'));
+
+        $memos = Memo::where('directory_id', $id)->get();
+        $directory_name = Memo::where('directory_id', $id)->first();
+
+
+        return view('user.memos.index')->with(['memos' => $memos, 'directory_name' => $directory_name]);
+
     }
 
     /**
@@ -62,14 +76,13 @@ class MemoController extends Controller
      */
     public function show(string $id)
     {
-        //
-        dd($id);
+
+
 
         $memos = Memo::where('directory_id', $id)->get();
         $directory_name = Memo::where('directory_id', $id)->first();
 
-
-        return view('user.memo.index')->with(['memos' => $memos, 'directory_name' => $directory_name]);
+        return view('user.memos.index')->with(['memos' => $memos, 'directory_name' => $directory_name]);
     }
 
     /**
@@ -77,7 +90,20 @@ class MemoController extends Controller
      */
     public function edit(string $id)
     {
-        //
+
+        Memo::create([
+            'directory_id' => $id,
+            'title' => 'タイトルを入力してください',
+            'content' => '内容を入力してください',
+        ]);
+        $ID=$id;
+
+        dd('ディレクトリーのID'.$ID);
+
+        // return redirect()->route('user.expired-users.show')->with(compact('id'));
+
+        return redirect()->route('user.memo.show')->with(['id'=>$ID]);
+        // //
     }
 
     /**
@@ -90,7 +116,7 @@ class MemoController extends Controller
         $memo->content = $request->content;
 
         $memo->save();
-        return redirect()->route('user.expired-users.show', ['memo' => $memo]);
+        return redirect()->route('user.memo.open', ['memo' => $memo]);
     }
 
     /**
@@ -99,16 +125,21 @@ class MemoController extends Controller
     public function destroy(string $id)
     {
         //
+        Memo::create([
+            'directory_id' => $id,
+            'title' => 'タイトルを入力してください',
+            'content' => '内容を入力してください',
+        ]);
+        return redirect()->route('user.memo.show')->with(compact('id'));
     }
 
     public function open(string $id)
     {
         //
-
-
         $memo = Memo::where('id', $id)->get();
 
-
-        return view('user.memo.show', compact('memo'));
+        return view('user.memos.show', compact('memo'));
     }
+
+
 }
