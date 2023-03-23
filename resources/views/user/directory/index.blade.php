@@ -71,6 +71,34 @@
                             {{-- ボタン区域上 --}}
                         </div>
 
+<<<<<<< HEAD
+=======
+                                            <a href="{{ route('user.memo.index',$dire->id) }}">
+                                                <div class="flex-grow">
+                                                    <h2 class="text-gray-900 title-font font-medium"contenteditable>
+                                                        {{ $dire->directory_name }}
+                                                    </h2>
+                                                    <p class="text-gray-500">更新日</p>
+                                                </div>
+                                            </a>
+
+                                            <form id="delete_{{ $dire->id }}" method="post"
+                                                action="{{ route('user.directory.destroy', ['directory' => $dire->id]) }}">
+                                                @csrf
+                                                @method('DELETE')
+                                                <div class="px-4 py-3">
+                                                    <a data-id="{{ $dire->id }}" onclick="deletePost(this)"
+                                                        class=" text-white bg-red-300 border-0 py-2 px-4 focus:outline-none hover:bg-red-500 rounded ">削除</a>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                        {{ $directory->links() }}
+                    </section>
+>>>>>>> origin/main
                     {{-- ここから上が独自の --}}
                    {{-- ここから挑戦↓ --}}
                     <section class="text-gray-600 body-font">

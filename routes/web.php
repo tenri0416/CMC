@@ -32,8 +32,22 @@ Route::resource('directory', DirectoryController::class)
     ->middleware(['auth:users']); //exceptは以外という意味 showメゾットを外す
 
 //メモ
-Route::resource('memo', MemoController::class)
-    ->middleware(['auth:users']); //exceptは以外という意味 showメゾットを外す
+
+
+Route::prefix('memo')->middleware('auth:users')->group(function () {
+Route::get('index/{memo}',[MemoController::class,'index'])->name('memo.index');
+
+Route::get('create/{memo}',[MemoController::class,'create'])->name('memo.create');
+
+Route::post('store/{memo}',[MemoController::class,'store'])->name('memo.store');
+Route::put('update/{memo}',[MemoController::class,'update'])->name('memo.update');
+
+Route::get('open/{memo}', [MemoController::class, 'open'])->name('memo.open');
+
+});
+// Route::resource('memo', MemoController::class)
+//     ->middleware(['auth:users']); //exceptは以外という意味 showメゾットを外す
+
 
 //     ->middleware(['auth:users']); //exceptは以外という意味 showメゾットを外す
 

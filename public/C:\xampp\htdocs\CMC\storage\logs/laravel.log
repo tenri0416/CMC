@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 [2023-03-23 20:33:13] local.ERROR: View [user.auth.login] not found. {"exception":"[object] (InvalidArgumentException(code: 0): View [user.auth.login] not found. at /Users/fujimotoyuki/Desktop/CMC/vendor/laravel/framework/src/Illuminate/View/FileViewFinder.php:137)
 [stacktrace]
 #0 /Users/fujimotoyuki/Desktop/CMC/vendor/laravel/framework/src/Illuminate/View/FileViewFinder.php(79): Illuminate\\View\\FileViewFinder->findInPaths('user.auth.login', Array)
@@ -101,6 +102,9 @@
 #41 {main}
 "} 
 [2023-03-23 20:33:24] local.ERROR: View [user.welcome] not found. {"exception":"[object] (InvalidArgumentException(code: 0): View [user.welcome] not found. at /Users/fujimotoyuki/Desktop/CMC/vendor/laravel/framework/src/Illuminate/View/FileViewFinder.php:137)
+=======
+[2023-03-22 21:53:01] local.ERROR: View [user.welcome] not found. {"exception":"[object] (InvalidArgumentException(code: 0): View [user.welcome] not found. at /Users/fujimotoyuki/Desktop/CMC/vendor/laravel/framework/src/Illuminate/View/FileViewFinder.php:137)
+>>>>>>> origin/main
 [stacktrace]
 #0 /Users/fujimotoyuki/Desktop/CMC/vendor/laravel/framework/src/Illuminate/View/FileViewFinder.php(79): Illuminate\\View\\FileViewFinder->findInPaths('user.welcome', Array)
 #1 /Users/fujimotoyuki/Desktop/CMC/vendor/laravel/framework/src/Illuminate/View/Factory.php(138): Illuminate\\View\\FileViewFinder->find('user.welcome')
@@ -154,13 +158,21 @@
 #49 /Users/fujimotoyuki/Desktop/CMC/vendor/laravel/framework/src/Illuminate/Foundation/resources/server.php(16): require_once('/Users/fujimoto...')
 #50 {main}
 "} 
+<<<<<<< HEAD
 [2023-03-23 20:33:24] local.ERROR: file_put_contents(C:\xampp\htdocs\CMC\storage\framework/sessions/SjqLsLzZAcYcW5vBloa1XggV2EJGYG083ks2R1vF): Failed to open stream: No such file or directory {"exception":"[object] (ErrorException(code: 0): file_put_contents(C:\\xampp\\htdocs\\CMC\\storage\\framework/sessions/SjqLsLzZAcYcW5vBloa1XggV2EJGYG083ks2R1vF): Failed to open stream: No such file or directory at /Users/fujimotoyuki/Desktop/CMC/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php:190)
+=======
+[2023-03-22 21:53:01] local.ERROR: file_put_contents(C:\xampp\htdocs\CMC\storage\framework/sessions/SADeXEhfV8AL5S9izlmniwfclYXKoXwCr94OdLfb): Failed to open stream: No such file or directory {"exception":"[object] (ErrorException(code: 0): file_put_contents(C:\\xampp\\htdocs\\CMC\\storage\\framework/sessions/SADeXEhfV8AL5S9izlmniwfclYXKoXwCr94OdLfb): Failed to open stream: No such file or directory at /Users/fujimotoyuki/Desktop/CMC/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php:190)
+>>>>>>> origin/main
 [stacktrace]
 #0 /Users/fujimotoyuki/Desktop/CMC/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(250): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'file_put_conten...', '/Users/fujimoto...', 190)
 #1 [internal function]: Illuminate\\Foundation\\Bootstrap\\HandleExceptions->Illuminate\\Foundation\\Bootstrap\\{closure}(2, 'file_put_conten...', '/Users/fujimoto...', 190)
 #2 /Users/fujimotoyuki/Desktop/CMC/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(190): file_put_contents('C:\\\\xampp\\\\htdocs...', 'a:3:{s:6:\"_toke...', 2)
 #3 /Users/fujimotoyuki/Desktop/CMC/vendor/laravel/framework/src/Illuminate/Session/FileSessionHandler.php(90): Illuminate\\Filesystem\\Filesystem->put('C:\\\\xampp\\\\htdocs...', 'a:3:{s:6:\"_toke...', true)
+<<<<<<< HEAD
 #4 /Users/fujimotoyuki/Desktop/CMC/vendor/laravel/framework/src/Illuminate/Session/Store.php(173): Illuminate\\Session\\FileSessionHandler->write('SjqLsLzZAcYcW5v...', 'a:3:{s:6:\"_toke...')
+=======
+#4 /Users/fujimotoyuki/Desktop/CMC/vendor/laravel/framework/src/Illuminate/Session/Store.php(173): Illuminate\\Session\\FileSessionHandler->write('SADeXEhfV8AL5S9...', 'a:3:{s:6:\"_toke...')
+>>>>>>> origin/main
 #5 /Users/fujimotoyuki/Desktop/CMC/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(238): Illuminate\\Session\\Store->save()
 #6 /Users/fujimotoyuki/Desktop/CMC/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(130): Illuminate\\Session\\Middleware\\StartSession->saveSession(Object(Illuminate\\Http\\Request))
 #7 /Users/fujimotoyuki/Desktop/CMC/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(64): Illuminate\\Session\\Middleware\\StartSession->handleStatefulRequest(Object(Illuminate\\Http\\Request), Object(Illuminate\\Session\\Store), Object(Closure))
