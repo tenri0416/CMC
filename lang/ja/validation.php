@@ -157,6 +157,7 @@ return [
         'name' => '名前',
         'email' => 'メールアドレス',
         'password' => 'パスワード',
+        'directory_name'=>'フォルダ名',
     ],
 
 ];

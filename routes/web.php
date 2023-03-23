@@ -35,8 +35,12 @@ Route::resource('directory', DirectoryController::class)
 Route::resource('memo', MemoController::class)
     ->middleware(['auth:users']); //exceptは以外という意味 showメゾットを外す
 
+//     ->middleware(['auth:users']); //exceptは以外という意味 showメゾットを外す
+
+
 Route::prefix('expired-users')->middleware('auth:users')->group(function () {
-    Route::get('show/{memo}', [MemoController::class, 'open'])->name('expired-users.show');
+    Route::get('memo/{memo}', [MemoController::class, 'open'])->name('expired-users.show');
+     Route::get('store/{memo}', [MemoController::class, 'file_store'])->name('expired-users.store');
     // Route::post('destroy/{owner}', [MemoController::class, 'expiredOwnerDestroy'])
     //     ->name('expired-owners.destroy');
 });

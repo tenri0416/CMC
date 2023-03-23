@@ -10,6 +10,7 @@ use App\Models\Directory;
 use Throwable;
 use App\Models\Memo;
 use Illuminate\Validation\Rules;
+use Carbon\Carbon;
 
 use Illuminate\Support\Facades\DB;
 
@@ -63,7 +64,7 @@ class DirectoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'directory_name' => ['required', 'string', 'max:50', 'min:1'],
+            'directory_name' => ['required', 'string', 'max:20', 'min:1'],
         ]);
 
         try {
@@ -72,11 +73,13 @@ class DirectoryController extends Controller
                     $directory = Directory::create([
                         'user_id' => Auth::id(),
                         'directory_name' => $request->directory_name,
+                        'created_at'=>new Carbon('now'),
                     ]);
                     Memo::create([
                         'directory_id' => $directory->id,
                         'title' => 'タイトルを入力してください',
                         'content' => '内容を入力してください',
+                        'created_at'=>new Carbon('now'),
                     ]);
                 },
                 2
@@ -85,7 +88,7 @@ class DirectoryController extends Controller
             Log::error($e); //エラーを（例外を)Logに書き込む
             throw $e; //エラー(例外を)画面に出す
         }
-        return redirect()->route('user.directory.index');
+        return redirect()->route('user.directory.index')->with(['message' => '新規フォルダを作成しました','status' => 'info']);
     }
 
     /**
@@ -101,7 +104,8 @@ class DirectoryController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $directory=Directory::findOrFail($id);
+        return view('user.directory.edit',compact('directory'));
     }
 
     /**
@@ -109,7 +113,16 @@ class DirectoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'directory_name' => ['required', 'string', 'max:20','min:1'],
+
+        ]);
+
+        $directory=Directory::findOrFail($id);
+        $directory->directory_name=$request->directory_name;
+        $directory->user_id=Auth::id();
+        $directory->save();
+        return redirect()->route('user.directory.index')->with(['message' => 'フォルダ名を変更しました','status' => 'green']);
     }
 
     /**
@@ -118,6 +131,6 @@ class DirectoryController extends Controller
     public function destroy(string $id)
     {
         Directory::findOrFail($id)->delete(); //ソフトデリート
-        return redirect()->route('user.directory.index');
+        return redirect()->route('user.directory.index')->with(['message' => 'フォルダを削除しました','status' => 'alert']);
     }
 }

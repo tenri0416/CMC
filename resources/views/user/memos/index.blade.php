@@ -17,7 +17,13 @@
                                     {{ $directory_name->directory->directory_name }}</h1>
 
                             </div>
-                            <a href="{{ route('user.memo.store', $directory_name->directory->directory_id) }}">作成</a>
+
+                            <form method="post"action="{{route('user.memo.store',['memo'=>$directory_name->directory->id])}}">
+                                @csrf
+                                @method('post')
+
+                                <button>作成</button>
+                            </form>
                             <div class="lg:w-2/3 w-full mx-auto overflow-auto">
                                 <table class="table-auto w-full text-left whitespace-no-wrap">
                                     <thead>
@@ -44,14 +50,21 @@
                                             <tr>
 
                                                 <td class="px-4 py-3"><a
-                                                        href="{{ route('user.expired-users.show', $memo->id) }}">{{ $memo->title }}</a>
+                                                        href="{{ route('user.memo.open', $memo->id) }}">{{ $memo->title }}</a>
                                                 </td>
-                                                {{-- <td class="px-4 py-3">5 Mb/s</td>
-                                                <td class="px-4 py-3">15 GB</td>
-                                                <td class="px-4 py-3 text-lg text-gray-900">Free</td>
-                                                <td class="w-10 text-center">
+                                                <td class="px-4 py-3"></td>
+                                                <td class="px-4 py-3 text-lg text-gray-900"></td>
+                                                {{--<td class="w-10 text-center">
                                                     <input name="plan" type="radio">
                                                 </td> --}}
+                                                <form id="delete_{{ $memo->id }}" method="post"
+                                                    action="{{ route('user.memo.destroy', ['memo' => $memo->id]) }}">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                <td class="px-4 py-3">
+                                                    <a data-id="{{ $memo->id }}" onclick="deletePost(this)"
+                                                        class=" text-white bg-red-300 border-0 py-2 px-4 focus:outline-none hover:bg-red-500 rounded ">削除</a>
+                                                    </td>
                                             </tr>
                                         @endforeach
 
@@ -78,4 +91,13 @@
             </div>
         </div>
     </div>
+    <script>
+        function deletePost(e) {
+            console.log(e);
+            'use strict';
+            if (confirm('本当に削除してもいいですか?')) {
+                document.getElementById('delete_' + e.dataset.id).submit();
+            }
+        }
+    </script>
 </x-app-layout>
